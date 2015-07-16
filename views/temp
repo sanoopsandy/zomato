@@ -23,43 +23,35 @@ y = RestClient::Request.execute(
 )
 obj = JSON.parse(y)
 def get_city_list(obj)
-  @len = obj["subzones"].length
-  @local = []
-  @subzone_id = []
-  for i in 0..@len-1
-    @local.push(obj["subzones"][i]["subzone"]["name"])
-    @subzone_id.push(obj["subzones"][i]["subzone"]["subzone_id"])
-  end
+	@len = obj["subzones"].length
+	@local = []
+	@subzone_id = []
+	for i in 0..@len-1
+		@local.push(obj["subzones"][i]["subzone"]["name"])
+		@subzone_id.push(obj["subzones"][i]["subzone"]["subzone_id"])
+	end
 end
 get_city_list(obj)
  %>
 
 <div class="container">
-  <div class="jumbotron">
-  <h1> <a href="/"> ZOMATO</a> </h1> 
-  </div>
-  <table class="table table-striped">
+<h1>LOCALITY </h1>
+<h3>	SELECT A LOCALITY TO SEARCH FOR RESTAURANTS </h3>
+ 	<table class="table table-striped">
     <thead>
       <tr>
-        <th>LOCALITY</th>
+        <th>STATES</th>
       </tr>
     </thead>
     <tbody>
-    <% i=0
-    while i < @local.length %>
-      <tr>
-        <td><a href="restaurant/<%=@subzone_id[i] %>"> <%= @local[i]%> </a></td>
-        <% i = i + 1 %>
-        <td><a href="restaurant/<%=@subzone_id[i] %>"> <%= @local[i]%> </a></td>
-        <% i = i + 1 %>
-        <td><a href="restaurant/<%=@subzone_id[i] %>"> <%= @local[i]%> </a></td>
-        <% i = i + 1 %>
+    <% for i in 0..@local.length-1 %>
+   		<tr>
+        <td><a href="restaurant/<%=@subzone_id[i] %>" > <%= @local[i]%></td>
      </tr>
-    <% end %>   
+		<% end %>   
     </tbody>
   </table>
 </div>
-
 
 </body>
 </html>

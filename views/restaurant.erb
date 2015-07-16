@@ -13,22 +13,22 @@
 
 <%
 
-@city = @city_id.to_i
+@rest = @subzone_id.to_i
 
 require 'rest-client'
-y = RestClient::Request.execute(
+z = RestClient::Request.execute(
  :method => :get,
- :url => "https://api.zomato.com/v1/subzones.json?city_id="+@city.to_s,
+ :url => "https://api.zomato.com/v1/search.json?subzone_id="+@rest.to_s,
  :headers => {"X-Zomato-API-Key" => "7749b19667964b87a3efc739e254ada2"}
 )
-obj = JSON.parse(y)
+obj = JSON.parse(z)
 def get_city_list(obj)
-  @len = obj["subzones"].length
-  @local = []
-  @subzone_id = []
+  @len = obj["results"].length
+  @names = []
+  @id = []
   for i in 0..@len-1
-    @local.push(obj["subzones"][i]["subzone"]["name"])
-    @subzone_id.push(obj["subzones"][i]["subzone"]["subzone_id"])
+    @names.push(obj["results"][i]["result"]["name"])
+    @id.push(obj["results"][i]["result"]["id"])
   end
 end
 get_city_list(obj)
@@ -41,25 +41,18 @@ get_city_list(obj)
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>LOCALITY</th>
+        <th>STATES</th>
       </tr>
     </thead>
     <tbody>
-    <% i=0
-    while i < @local.length %>
+    <% for i in 0..@names.length-1 %>
       <tr>
-        <td><a href="restaurant/<%=@subzone_id[i] %>"> <%= @local[i]%> </a></td>
-        <% i = i + 1 %>
-        <td><a href="restaurant/<%=@subzone_id[i] %>"> <%= @local[i]%> </a></td>
-        <% i = i + 1 %>
-        <td><a href="restaurant/<%=@subzone_id[i] %>"> <%= @local[i]%> </a></td>
-        <% i = i + 1 %>
+        <td><a href="details/<%=@id[i] %>" > <%= @names[i]%> </a></td>
      </tr>
     <% end %>   
     </tbody>
   </table>
 </div>
-
 
 </body>
 </html>

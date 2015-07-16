@@ -8,16 +8,18 @@ require 'rubygems'
 
 
 
-x = RestClient::Request.execute(
+z = RestClient::Request.execute(
  :method => :get,
- :url => "https://api.zomato.com/v1/subzones.json?city_id=13",
+ :url => "https://api.zomato.com/v1/restaurant.json/16512742",
  :headers => {"X-Zomato-API-Key" => "7749b19667964b87a3efc739e254ada2"}
 )
-obj = JSON.parse(x)
-def get_city_list(obj)
-	len = obj["subzones"].length
-	for i in 0..len-1
-				puts obj["subzones"][i]["subzone"]["name"]
-	end
-end
-get_city_list(obj)
+obj = JSON.parse(z)
+puts obj["menu"]["0"]["page"]["url"]
+# def get_city_list(obj)
+# 	len = obj["results"].length
+# 	for i in 0..len-1
+# 				puts obj["results"][i]["result"]["name"]
+#     		puts obj["results"][i]["result"]["id"]
+# 	end
+# end
+# get_city_list(obj)
