@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>LOCALITY</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+<%
+
+@city = @city_id.to_i
+
+require 'rest-client'
+y = RestClient::Request.execute(
+ :method => :get,
+ :url => "https://api.zomato.com/v1/subzones.json?city_id="+@city.to_s,
+ :headers => {"X-Zomato-API-Key" => "7749b19667964b87a3efc739e254ada2"}
+)
+obj = JSON.parse(y)
+def get_city_list(obj)
+	@len = obj["subzones"].length
+	@local = []
+	@subzone_id = []
+	for i in 0..@len-1
+		@local.push(obj["subzones"][i]["subzone"]["name"])
+		@subzone_id.push(obj["subzones"][i]["subzone"]["subzone_id"])
+	end
+end
+get_city_list(obj)
+ %>
+
+<div class="container">
+<h1>LOCALITY </h1>
+<h3>	SELECT A LOCALITY TO SEARCH FOR RESTAURANTS </h3>
+ 	<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>STATES</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% for i in 0..@local.length-1 %>
+   		<tr>
+        <td><a href="state/<%=@subzone_id[i] %>" > <%= @local[i]%></td>
+     </tr>
+		<% end %>   
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

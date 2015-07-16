@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ZOMATO</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<% 
+require 'rest-client'
+  x = RestClient::Request.execute(
+ :method => :get,
+ :url => "https://api.zomato.com/v1/cities.json",
+ :headers => {"X-Zomato-API-Key" => "7749b19667964b87a3efc739e254ada2"}
+  )
+  obj = JSON.parse(x)
+  
+  def get_city_list(obj)
+    @temp = []
+    @id = []
+    for i in 0..24
+      if obj["cities"][i]["city"]["country_id"] == 1
+          @temp.push(obj["cities"][i]["city"]["name"])
+          @id.push(obj["cities"][i]["city"]["id"])
+      end
+    end
+  end
+  get_city_list(obj)
+  %>
+
+
+<div class="container">
+  <div class="jumbotron">
+  <h1>ZOMATO</h1> 
+  <h3>  SELECT A STATE TO SEARCH FOR RESTAURANTS </h3>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>STATES</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% for i in 0..@temp.length-1 %>
+      <tr>
+        <td><a href="state/<%=@id[i] %>" > <%= @temp[i]%></td>
+     </tr>
+    <% end %>   
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
