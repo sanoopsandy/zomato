@@ -17,9 +17,9 @@
 
 require 'rest-client'
 y = RestClient::Request.execute(
- :method => :get,
- :url => "https://api.zomato.com/v1/subzones.json?city_id="+@city.to_s,
- :headers => {"X-Zomato-API-Key" => "7749b19667964b87a3efc739e254ada2"}
+:method => :get,
+:url => "https://api.zomato.com/v1/subzones.json?city_id="+@city.to_s,
+:headers => {"X-Zomato-API-Key" => "7749b19667964b87a3efc739e254ada2"}
 )
 obj = JSON.parse(y)
 def get_city_list(obj)
@@ -32,11 +32,11 @@ def get_city_list(obj)
   end
 end
 get_city_list(obj)
- %>
+%>
 
 <div class="container">
   <div class="jumbotron">
-  <h1> <a href="/"> ZOMATO</a> </h1> 
+  	<h1> <a href="/"> ZOMATO</a> </h1> 
   </div>
   <table class="table table-striped">
     <thead>
@@ -59,7 +59,6 @@ get_city_list(obj)
     </tbody>
   </table>
 </div>
-
 
 </body>
 </html>

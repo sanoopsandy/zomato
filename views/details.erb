@@ -17,23 +17,22 @@
 
 require 'rest-client'
 z = RestClient::Request.execute(
- :method => :get,
- :url => "https://api.zomato.com/v1/restaurant.json/"+@detail.to_s,
- :headers => {"X-Zomato-API-Key" => "7749b19667964b87a3efc739e254ada2"}
+:method => :get,
+:url => "https://api.zomato.com/v1/restaurant.json/"+@detail.to_s,
+:headers => {"X-Zomato-API-Key" => "7749b19667964b87a3efc739e254ada2"}
 )
 obj = JSON.parse(z)
  %>
 
 <div class="container">
   <div class="jumbotron">
-  <h1> <a href="/"> ZOMATO</a> </h1> 
+    <h1> <a href="/"> ZOMATO</a> </h1> 
   </div>
   </br>
   </br>
   <div class="row">
     <div class="col-sm-4" > <img src=<%= obj["image_310_150"] %> class="img-rounded" alt="Cinque Terre" width="320" height="260"> </div>
     <div class="col-sm-8" ><h2><%= obj["name"] %></h2>
-        <!-- </br> -->
         <h3>Address : <%=obj["location"]["address"]%></h3>
         <h3>Locality : <%=obj["location"]["locality"]%></h3>
         <h3>Overall Rating: <%=obj["editorRating"]["overall"]%></h3>
@@ -45,8 +44,7 @@ obj = JSON.parse(z)
     <% if obj["userReviews"]["0"].nil? %>
         <div class="col-sm-12"><h4>Not Available</h4>
     <% else %>
-        <div class="col-sm-12"><h4><%=obj["userReviews"]["0"]["review"]["reviewText"]%></h4>
-        </div>
+        <div class="col-sm-12"><h4><%=obj["userReviews"]["0"]["review"]["reviewText"]%></h4></div>
         <br>
         <div class="col-sm-12"><h4><%=obj["userReviews"]["1"]["review"]["reviewText"]%></h4>
     <% end %>
