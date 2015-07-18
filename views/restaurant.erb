@@ -1,39 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>ZOMATO</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-</head>
-<body>
-
-
-<%
-
-@rest = @subzone_id.to_i
-
-require 'rest-client'
-z = RestClient::Request.execute(
-:method => :get,
-:url => "https://api.zomato.com/v1/search.json?subzone_id="+@rest.to_s,
-:headers => {"X-Zomato-API-Key" => "7749b19667964b87a3efc739e254ada2"}
-)
-obj = JSON.parse(z)
-def get_city_list(obj)
-  @len = obj["results"].length
-  @names = []
-  @id = []
-  for i in 0..@len-1
-    @names.push(obj["results"][i]["result"]["name"])
-    @id.push(obj["results"][i]["result"]["id"])
-  end
-end
-get_city_list(obj)
-%>
-
 <div class="container">
   <div class="jumbotron">
     <h1> <a href="/"> ZOMATO</a> </h1> 
@@ -41,11 +5,13 @@ get_city_list(obj)
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>STATES</th>
+        <th>RESTAURANT</th>
       </tr>
     </thead>
     <tbody>
-    <% for i in 0..@names.length-1 %>
+    <%@names = @rest_var[0]
+      @id = @rest_var[1]
+      for i in 0..@names.length-1 %>
       <tr>
         <td><a href="details/<%=@id[i] %>" > <%= @names[i]%> </a></td>
      </tr>
@@ -53,6 +19,3 @@ get_city_list(obj)
     </tbody>
   </table>
 </div>
-
-</body>
-</html>
