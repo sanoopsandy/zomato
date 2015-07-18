@@ -3,6 +3,7 @@ class Get_list
 	def self.get_city_list(obj)
 	  @temp = []
 	  @id = []
+	  # REVIEW -- Read about Ruby iterators. Use them. Use filter & collect over here.
 	  obj["cities"].each do |city|
 	    if city['city']["country_id"] == 1
 	      @temp.push(city['city']["name"])

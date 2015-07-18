@@ -5,10 +5,11 @@ require './controller/get_list.rb'
 set :server, 'webrick'
 
 get '/'  do
+  # REVIEW -- why are @var variable being used here? Are these attributes of
+  # an objects? Which object?
 	@state_obj = Main_api.list_states
 	@list_var = Get_list.get_city_list(@state_obj)
-	erb :index, :locals => {'list_var' => @list_var}
-	
+	erb :index, :locals => {'list_var' => @list_var}	
 end
 
 get '/state/:id' do

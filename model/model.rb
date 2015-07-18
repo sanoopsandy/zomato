@@ -1,6 +1,8 @@
 require 'rest-client'
 require 'json'
 
+# REVIEW -- class names & file name should match.
+# REVIEW -- Fix naming conventions. Read https://github.com/bbatsov/ruby-style-guide#naming
 class Main_api
 	@@Main_api_end_point = "https://api.zomato.com/v1/"
 
