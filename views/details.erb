@@ -5,40 +5,38 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-4" > <img src=<%= @restaurant_obj["image_470_310"] %> class="img-rounded" alt="Cinque Terre" width="320" height="260"> </div>
+    <div class="col-sm-4" > <img src=<%= @restaurant_obj["image"] %> class="img-rounded" alt="Cinque Terre" width="320" height="260"> </div>
     <div class="col-sm-8" ><h2><%= @restaurant_obj["name"] %></h2>
-        <h3>Address : <%= @restaurant_obj["location"]["address"] %></h3>
-        <h3>Locality : <%= @restaurant_obj["location"]["locality"]%></h3>
-        <h3>City : <%= @restaurant_obj["location"]["city"]%></h3>
-        <h3>Overall Rating: <%= @restaurant_obj["editorRating"]["overall"]%></h3>
-        <h3>Average Cost For Two: <%= @restaurant_obj["avgCostForTwo"]%></h3>
-        <h3>Timings: <%= @restaurant_obj["timings"]%></h3>
+        <h3>Address : <%= @restaurant_obj["address"] %></h3>
+        <h3>Locality : <%= @restaurant_obj["locality"]%></h3>
+        <h3>City : <%= @restaurant_obj["city"]%></h3>
+        <h3>Average Cost For Two: <%= @restaurant_obj["avgcost"]%></h3>
+        <h3>Timings: <%= @restaurant_obj["timing"]%></h3>
         <h3>URL: <a href = <%='"'+ @restaurant_obj["url"]+'"'%>>home</a></h3> 
     </div>
   </div>
-  
   <div class = "row">
     <div class="col-sm-12"><h3>User Review</h3>    
-    <% if @restaurant_obj["userReviews"]["0"].nil? %>
+    <% if @restaurant_obj["review"].nil? %>
         <div class="col-sm-12"><h4>Not Available</h4>
     <% else %>
-        <div class="col-sm-12"><h4><%= @restaurant_obj["userReviews"]["0"]["review"]["reviewText"]%></h4></div>
+        <div class="col-sm-12"><h4><%= @restaurant_obj["display_rev"]%></h4></div>
         <br>
-        <div class="col-sm-12"><h4><%= @restaurant_obj["userReviews"]["1"]["review"]["reviewText"]%></h4>
-    <% end %>
-        </div>        
+    <% end %>        
         </div>
     </div>
   </div>
-
   <div class = "row">
     <div class="col-sm-12"><h3>Menu</h3>
       <% if @restaurant_obj["menu"].empty? %>
         <div class="col-sm-12"> <h4>Not Available</h4> 
       <% else %>
-        <div class="col-sm-6" > <img src=<%= @restaurant_obj["menu"]["0"]["page"]["url"] %> class="img-rounded" alt="Cinque Terre" width="460" height="680"> </div>   
+        <div class="col-sm-6" > <img src=<%= @restaurant_obj["menu"] %> class="img-rounded" alt="Cinque Terre" width="460" height="680"> </div>   
       <% end %>
         </div>
     </div>
   </div>
+
+  
 </div>
+<!-- </div> -->

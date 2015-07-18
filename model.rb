@@ -27,7 +27,18 @@ class Main_api
   end
 
   def self.list_detail(rest_id)
-  	call_api("restaurant.json/",id = rest_id.to_s)
+  	det_obj = call_api("restaurant.json/",id = rest_id.to_s)
+    detail = {"name" => det_obj["name"],
+              "address" => det_obj["location"]["address"],
+              "locality" => det_obj["location"]["locality"],
+              "city" => det_obj["location"]["city"],
+              "avgcost" => det_obj["avgCostForTwo"],
+              "timing" => det_obj["timings"],
+              "url" => det_obj["url"],
+              "image" => det_obj["image_470_310"],
+              "review"   => det_obj["userReviews"]["0"],
+              "display_rev" => det_obj["userReviews"]["0"]["review"]["reviewText"],
+              "menu" => det_obj["menu"]["0"]["page"]["url"]}
+    return detail
   end
-
 end
