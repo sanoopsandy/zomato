@@ -38,19 +38,14 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>STATES</th>
+        <th>CITIES</th>
       </tr>
     </thead>
     <tbody>
-    <% i=0
-    @id = @list_var[1]
-    @state = @list_var[0]
-    while i < @list_var[0].length %>    
+    <% 
+    city.each do |x| %>    
       <tr>
-        <td><a href="state/<%=@id[i] %>" > <%= @state[i]%> </a></td>
-        <% i = i + 1 %>
-        <td><a href="state/<%=@id[i] %>" > <%= @state[i]%> </a></td>
-        <% i = i + 1 %>
+        <td><a href="city/<%=x.id %>" > <%= x.name%> </a></td>           
      </tr>
     <% end %>   
     </tbody>

@@ -10,11 +10,10 @@
     </thead>
     <tbody>
       <!-- REVIEW: Why are you not using iterators? -->
-    <%@names = @rest_var[0]
-      @id = @rest_var[1]
-      for i in 0..@names.length-1 %>
+    <%
+      rest.each do |z| %>
       <tr>
-        <td><a href="details/<%=@id[i] %>" > <%= @names[i]%> </a></td>
+        <td><a href="details/<%=z.id %>" > <%= z.name%> </a></td>
      </tr>
     <% end %>   
     </tbody>

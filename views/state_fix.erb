@@ -9,17 +9,10 @@
       </tr>
     </thead>
     <tbody>
-    <% i=0
-    @subzone_id=@local_var[1]
-    @local = @local_var[0]
-    while i < @local.length %>
+    <% local.each do |y|%>
       <tr>
-        <td><a href="restaurant/<%=@subzone_id[i] %>"> <%= @local[i]%> </a></td>
-        <% i = i + 1 %>
-        <td><a href="restaurant/<%=@subzone_id[i] %>"> <%= @local[i]%> </a></td>
-        <% i = i + 1 %>
-        <td><a href="restaurant/<%=@subzone_id[i] %>"> <%= @local[i]%> </a></td>
-        <% i = i + 1 %>
+        <td><a href="restaurant/<%=y.id %>"> <%= y.name%> </a></td>
+        
      </tr>
     <% end %>   
     </tbody>
