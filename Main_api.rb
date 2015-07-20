@@ -20,7 +20,7 @@ class Main_api
 
   def self.update_city(city_obj)
     city_arr = Array.new
-    city_obj["cities"].map do |city|
+    city_obj["cities"].each do |city|
       if city['city']["country_id"] == 1
         name = city['city']["name"]
         id = city['city']["id"]
@@ -33,7 +33,7 @@ class Main_api
 
   def self.update_locality(local_obj)
     locality = Array.new
-    local_obj["subzones"].map do |subzone|
+    local_obj["subzones"].each do |subzone|
       name = subzone['subzone']["name"]
       id = subzone['subzone']["subzone_id"]
       temp = Locality.new(name, id)
@@ -44,7 +44,7 @@ class Main_api
 
   def self.update_restaurant(rest_obj)
     restaurant = Array.new
-    rest_obj["results"].map do |result|
+    rest_obj["results"].each do |result|
       name = result['result']["name"]
       id = result['result']["id"]
       temp = Restaurant.new(name, id,'')
@@ -77,7 +77,7 @@ class Main_api
     detail = {"address" => det_obj["location"]["address"],
               "locality" => det_obj["location"]["locality"],
               "city" => det_obj["location"]["city"],
-              "avgcost" => det_obj["avgCostForTwo"],
+              "avgcostfortwo" => det_obj["avgCostForTwo"],
               "timings" => det_obj["timings"],
               "url" => det_obj["url"],
               "image" => det_obj["image_470_310"],

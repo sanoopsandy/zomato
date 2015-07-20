@@ -1,0 +1,15 @@
+require 'net/http'
+require 'json'
+require 'uri'
+
+# class Main_swapapi
+	def call_api() 
+	# Main_api_end_point = "http://api.civicapps.org/restaurant-inspections/"
+
+	# def self.call_api(query, id) 
+	url = URI.encode("http://api.civicapps.org/restaurant-inspections/")
+	resp = Net::HTTP.get_response(URI.parse(url))
+	obj = JSON.parse(url)
+	puts obj
+	end
+call_api
